@@ -4,6 +4,8 @@
 
 DOMAIN='cloudgeeks.tk'
 SUBDOMAIN='*'
+DAYS='36500'
+default_bits='4096'
 
 #Organization Details
 COUNTRY='PK'
@@ -29,7 +31,7 @@ mkdir -p "${DIR}"
 # of automation, so the DN is encoding and not prompted.
 cat > "${DIR}/openssl.cnf" << EOF
 [req]
-default_bits = 2048
+default_bits = ${default_bits}
 encrypt_key  = no # Change to encrypt the private key using des3 or similar
 default_md   = sha256
 prompt       = no
@@ -72,8 +74,8 @@ EOF
 # Be sure to update the subject to match your organization.
 openssl req \
   -new \
-  -newkey rsa:2048 \
-  -days 36500 \
+  -newkey rsa:${default_bits} \
+  -days ${DAYS} \
   -nodes \
   -x509 \
   -subj "/C="$COUNTRY"/ST="$PROVINCE"/L="$LOCATION"/O="$DEPARTMENT"" \
@@ -86,7 +88,7 @@ openssl req \
 
 # Generate the private key for the service. Again, you may want to increase
 # the bits to 4096.
-openssl genrsa -out "${DIR}/"$DOMAIN".key" 2048
+openssl genrsa -out "${DIR}/"$DOMAIN".key" ${default_bits}
 
 # Generate a CSR using the configuration and the key just generated. We will
 # give this CSR to our CA to sign.
@@ -99,7 +101,7 @@ openssl req \
 # by our CA.
 openssl x509 \
   -req \
-  -days 3650 \
+  -days ${DAYS} \
   -in "${DIR}/"$DOMAIN".csr" \
   -CA "${DIR}/CA.crt" \
   -CAkey "${DIR}/CA.key" \
@@ -112,8 +114,8 @@ openssl x509 \
 openssl x509 -in "${DIR}/"$DOMAIN".crt" -noout -text
 
 # Generate PFX For Windows 
-#openssl pkcs12 -export -out "$DOMAIN".pfx -inkey "$DOMAIN".key -in "$DOMAIN".crt
+# openssl pkcs12 -export -out "$DOMAIN".pfx -inkey "$DOMAIN".key -in "$DOMAIN".crt
 
-#https://aws.amazon.com/blogs/security/how-to-prepare-for-aws-move-to-its-own-certificate-authority/
+# https://aws.amazon.com/blogs/security/how-to-prepare-for-aws-move-to-its-own-certificate-authority/
 
 # End
