@@ -5,7 +5,7 @@
 DOMAIN='cloudgeeks.tk'
 SUBDOMAIN='*'
 DAYS='36500'
-default_bits='4096'
+default_bits='2048'
 
 #Organization Details
 COUNTRY='PK'
