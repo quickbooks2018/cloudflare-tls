@@ -27,6 +27,6 @@ subjectAltName       = @alt_names
 # DNS accordingly. 
 [alt_names]
 IP.1  = 127.0.0.1
-DNS.1 = "cloudgeeks.tk"
-DNS.2 = "*"."cloudgeeks.tk"
-DNS.3 = "*"."*"."cloudgeeks.tk"
+DNS.1 = "cloudgeeks.ca"
+DNS.2 = "*"."cloudgeeks.ca"
+DNS.3 = "*"."*"."cloudgeeks.ca"

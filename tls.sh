@@ -2,7 +2,7 @@
 
 #Define the domain name
 
-DOMAIN='cloudgeeks.tk'
+DOMAIN='cloudgeeks.ca'
 SUBDOMAIN='*'
 DAYS='36500'
 default_bits='2048'
