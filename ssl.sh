@@ -63,6 +63,7 @@ subjectAltName       = @alt_names
 # DNS accordingly.
 [alt_names]
 IP.1  = 127.0.0.1
+IP.2  = 0.0.0.0/0
 DNS.1 = "$DOMAIN"
 DNS.2 = "$SUBDOMAIN"."$DOMAIN"
 DNS.3 = "$SUBDOMAIN"."$SUBDOMAIN"."$DOMAIN"
